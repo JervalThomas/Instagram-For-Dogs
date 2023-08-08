@@ -1,7 +1,7 @@
-import { View, Text, TextInput, Button } from 'react-native'
+import { View, TextInput, Button } from 'react-native'
 import React, { useState } from 'react'
-import { FIREBASE_APP, FIREBASE_AUTH } from '../../firebaseConfig'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { FIREBASE_AUTH } from '../../firebaseConfig'
+import { createUserWithEmailAndPassword} from 'firebase/auth'
 
 const Register = () => {
   const [name, setName] = useState('');
