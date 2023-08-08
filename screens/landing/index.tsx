@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Text, View } from 'react-native'
+import { Button, View } from 'react-native'
 
 export default function Landing({ navigation }) {
   return (
@@ -16,3 +16,4 @@ export default function Landing({ navigation }) {
     </View>
   )
 }
+

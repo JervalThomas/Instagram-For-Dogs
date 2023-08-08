@@ -17,7 +17,7 @@ const UserStack = createNativeStackNavigator();
 function UserLayout() {
   return (
     <UserStack.Navigator>
-      <UserStack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <UserStack.Screen name = "Home" component = {HomeScreen} options = {{ headerShown: false }} />
     </UserStack.Navigator>
   );
 }
@@ -25,10 +25,10 @@ function UserLayout() {
 function NoUserLayout() {
   return (
     <NoUserStack.Navigator>
-      <NoUserStack.Screen name="Landing" component={LandingScreen} options={{ headerShown: false }} />
-      <NoUserStack.Screen name="Register" component={RegisterScreen} />
-      <NoUserStack.Screen name="Login" component={LoginScreen} />
-      <NoUserStack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <NoUserStack.Screen name = "Landing" component = {LandingScreen} options = {{ headerShown: false }} />
+      <NoUserStack.Screen name = "Register" component = {RegisterScreen} />
+      <NoUserStack.Screen name = "Login" component = {LoginScreen} options = {{ headerShown: false }} />
+      <NoUserStack.Screen name = "Home" component = {HomeScreen} options = {{ headerShown: false }} />
     </NoUserStack.Navigator>
   );
 }
@@ -44,13 +44,13 @@ export default function App() {
   }, []);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style = {{ flex: 1 }}>
       <NavigationContainer>
-        <MainStack.Navigator initialRouteName="Landing">
+        <MainStack.Navigator initialRouteName = "Landing">
           {user ? (
-            <MainStack.Screen name="UserLoggedIn" component={UserLayout} options={{ headerShown: false }} />
+            <MainStack.Screen name = "UserLoggedIn" component = {UserLayout} options = {{ headerShown: false }} />
           ) : (
-            <MainStack.Screen name="NoUser" component={NoUserLayout} options={{ headerShown: false }} />
+            <MainStack.Screen name = "NoUser" component = {NoUserLayout} options = {{ headerShown: false }} />
           )}
         </MainStack.Navigator>
       </NavigationContainer>

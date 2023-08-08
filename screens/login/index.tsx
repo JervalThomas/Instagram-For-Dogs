@@ -1,48 +1,51 @@
-import { View, TextInput, Button } from 'react-native'
-import React, { useState } from 'react'
-import { FIREBASE_AUTH } from '../../firebaseConfig'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { View, Image, StyleSheet } from 'react-native'
+import React from 'react'
+import LoginForm from '../../components/loginScreen/LoginForm';
+
+const INSTAGRAM_LOGO = 'https://img.freepik.com/premium-vector/instagram-social-media-icon-gradient-social-media-logo_197792-4682.jpg?w=2000'
 
 const signIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const auth = FIREBASE_AUTH;
+  return(
+    <View style = {styles.container}>
+      <View style = {styles.logoContainer}>
+        <Image 
+        source = 
+        {
+          {
+            uri: INSTAGRAM_LOGO, 
+            height: 150, 
+            width: 150
+          }
+        } 
+        />
+      </View>
+      <LoginForm/>
 
-  const onSignIn = async () => {
-    try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
-
-    }
-    catch (error: any) {
-      console.log(error);
-      alert('Login failed: ' + error.message);
-    }
-  }
-
-  return (
-    <View>
-      <TextInput
-        placeholder = "Email"
-        autoCapitalize = "none"
-        onChangeText = {(email) => setEmail(email)}
-      >
-      </TextInput>
-
-      <TextInput
-        placeholder = "Password"
-        autoCapitalize = "none"
-        secureTextEntry = {true}
-        onChangeText = {(password) => setPassword(password)}
-      >
-      </TextInput>
-
-      <Button
-        title = "Sign In"
-        onPress = {onSignIn}
-      />
     </View>
   )
+
 }
 
+const styles = StyleSheet.create
+(
+  {
+    container: 
+    {
+      flex: 1,
+      backgroundColor: 'white',
+      paddingTop: 50,
+      paddingHorizontal: 12,
+    },
+
+    logoContainer:
+    {
+      alignItems: 'center',
+      marginTop: 60,
+    },
+
+  }
+)
+
 export default signIn
+
+
