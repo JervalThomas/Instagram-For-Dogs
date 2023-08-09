@@ -25,9 +25,14 @@ function UserLayout() {
 function NoUserLayout() {
   return (
     <NoUserStack.Navigator>
-      <NoUserStack.Screen name = "Landing" component = {LandingScreen} options = {{ headerShown: false }} />
+      {/* <NoUserStack.Screen name = "Landing" component = {LandingScreen} options = {{ headerShown: false }} /> */}
+      <NoUserStack.Screen 
+        name = "Login" 
+        options = {{ headerShown: false }}
+       > 
+        {({ navigation }) => <LoginScreen navigation={navigation} />}
+      </NoUserStack.Screen>
       <NoUserStack.Screen name = "Register" component = {RegisterScreen} />
-      <NoUserStack.Screen name = "Login" component = {LoginScreen} options = {{ headerShown: false }} />
       <NoUserStack.Screen name = "Home" component = {HomeScreen} options = {{ headerShown: false }} />
     </NoUserStack.Navigator>
   );

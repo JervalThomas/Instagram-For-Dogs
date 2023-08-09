@@ -1,12 +1,12 @@
-import { View, TextInput, StyleSheet, Text, Pressable } from 'react-native'
+import { View, TextInput, StyleSheet, Text, Pressable, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { FIREBASE_AUTH } from '../../firebaseConfig'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 
-const LoginForm = () => 
+
+const LoginForm = ({navigation}) => 
 {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -62,16 +62,17 @@ const LoginForm = () =>
             </Pressable>
 
             <View 
-                style = {styles.signupContainer}
+                style = {styles.signupContainer} 
             >
                 <Text> Don't have an account? </Text>
-                <TouchableOpacity>
-                    <Text 
-                        style = {{color: '#6BB0F5'}}
-                    > 
-                        Sign Up 
-                    </Text>
-                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("Register")} 
+                >    
+                    <Text style = {{color: '#6BB0F5'}}>Sign Up</Text>
+                </TouchableOpacity> 
+                    
+                    
+                
             </View>
         </View>
     )

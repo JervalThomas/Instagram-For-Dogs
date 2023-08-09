@@ -1,29 +1,34 @@
-import { View, Image, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, Button } from 'react-native'
 import React from 'react'
 import LoginForm from '../../components/loginScreen/LoginForm';
 
 const INSTAGRAM_LOGO = 'https://img.freepik.com/premium-vector/instagram-social-media-icon-gradient-social-media-logo_197792-4682.jpg?w=2000'
 
-const signIn = () => {
+const signIn = ({navigation}) => {
   return(
     <View style = {styles.container}>
       <View style = {styles.logoContainer}>
         <Image 
-        source = 
-        {
+          source = 
           {
-            uri: INSTAGRAM_LOGO, 
-            height: 150, 
-            width: 150
+            {
+              uri: INSTAGRAM_LOGO, 
+              height: 150, 
+              width: 150
           }
         } 
         />
       </View>
-      <LoginForm/>
+
+      <LoginForm  navigation = {navigation} />
+
+      <Button
+        title = "HomeScreen"
+        onPress={() => navigation.navigate("Home")} 
+      />
 
     </View>
   )
-
 }
 
 const styles = StyleSheet.create
