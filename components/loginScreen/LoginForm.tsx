@@ -3,9 +3,6 @@ import React, { useState } from 'react'
 import { FIREBASE_AUTH } from '../../firebaseConfig'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
-
-
-
 const LoginForm = ({navigation}) => 
 {
     const [email, setEmail] = useState('');

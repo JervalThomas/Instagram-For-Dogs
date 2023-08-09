@@ -1,56 +1,52 @@
-import { View, TextInput, Button } from 'react-native'
-import React, { useState } from 'react'
-import { FIREBASE_AUTH } from '../../firebaseConfig'
-import { createUserWithEmailAndPassword} from 'firebase/auth'
+import { View, Image, StyleSheet, Button } from 'react-native'
+import React from 'react'
 
-const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const auth = FIREBASE_AUTH;
+import SignUpForm from '../../components/signUpScreen/signUpForm';
 
-  const onSignUp = async () => {
-    try {
-      const response = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(response);
+const INSTAGRAM_LOGO = 'https://img.freepik.com/premium-vector/instagram-social-media-icon-gradient-social-media-logo_197792-4682.jpg?w=2000'
 
-    }
-    catch (error: any) {
-      console.log(error);
-      alert('Registration failed: ' + error.message);
-    }
-  }
+const signIn = () => {
+  return(
+    <View style = {styles.container}>
+      <View style = {styles.logoContainer}>
+        <Image 
+          source = 
+          {
+            {
+              uri: INSTAGRAM_LOGO, 
+              height: 150, 
+              width: 150
+          }
+        } 
+        />
+      </View>
 
-  return (
-    <View>
-      <TextInput
-        placeholder="Name"
-        autoCapitalize="none"
-        onChangeText={(name) => setName(name)}
-      >
-      </TextInput>
-
-      <TextInput
-        placeholder="Email"
-        autoCapitalize="none"
-        onChangeText={(email) => setEmail(email)}
-      >
-      </TextInput>
-
-      <TextInput
-        placeholder="Password"
-        autoCapitalize="none"
-        secureTextEntry={true}
-        onChangeText={(password) => setPassword(password)}
-      >
-      </TextInput>
-
-      <Button
-        title="Sign UP"
-        onPress={onSignUp}
-      />
+      < SignUpForm />
+      
     </View>
   )
 }
 
-export default Register
+const styles = StyleSheet.create
+(
+  {
+    container: 
+    {
+      flex: 1,
+      backgroundColor: 'white',
+      paddingTop: 50,
+      paddingHorizontal: 12,
+    },
+
+    logoContainer:
+    {
+      alignItems: 'center',
+      marginTop: 60,
+    },
+
+  }
+)
+
+export default signIn
+
+
