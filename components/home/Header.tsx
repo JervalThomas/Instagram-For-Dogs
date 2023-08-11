@@ -1,7 +1,9 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { Button } from 'react-native-elements'
+import { FIREBASE_AUTH } from '../../firebaseConfig'
 
-const Header = () => {
+const Header = ({ navigation } : any) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity>
@@ -24,6 +26,11 @@ const Header = () => {
                         style={styles.icon} />
                 </TouchableOpacity>
             </View>
+
+            <Button 
+                title = "Sign out" 
+                onPress = {() => FIREBASE_AUTH.signOut()}
+            />
         </View>
     )
 }
