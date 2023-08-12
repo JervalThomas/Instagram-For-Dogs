@@ -6,14 +6,15 @@ export const POSTS = [
         user: USERS[0].user,
         likes: '1209',
         profilePicture: USERS[0].image,
+        caption: " Me and my lovely dog Maddy. she been with me since i moved in and she loves her new home",
         comments: [
             {
                 user: 'Mitchel',
-                Comment: 'Love your dog, she a beauty 🥺',
+                comment: 'Love your dog, she a beauty 🥺',
             },
             {
                 user: 'Mandy',
-                Comment: "She's so cute 🫣",
+                comment: "She's so cute 🫣",
             },
         ],
     },

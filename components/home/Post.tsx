@@ -34,7 +34,10 @@ const Post = ({ post }) => {
             <PostImage post={post} />
             <View style={{ marginTop: 10 }}>
                 <PostFooter />
-                <Likes post={post}/>
+                <Likes post={post} />
+                <Caption post={post} />
+                <CommentsSection post={post} />
+                <Comments post={post}/>
             </View>
         </View>
     )
@@ -68,17 +71,49 @@ const PostFooter = () => (
             <Icon imgStyle={styles.footerIcon} imgUrl={PostFooterIcons[1].Image} />
             <Icon imgStyle={styles.footerIcon} imgUrl={PostFooterIcons[2].Image} />
         </View>
-        <View style={{flex: 1, alignItems: "flex-end"}}>
-        <Icon imgStyle={styles.footerIcon} imgUrl={PostFooterIcons[3].Image} />
+        <View style={{ flex: 1, alignItems: "flex-end" }}>
+            <Icon imgStyle={styles.footerIcon} imgUrl={PostFooterIcons[3].Image} />
         </View>
     </View>
 
 )
 
-const Likes = ({post}) => (
-    <View> 
-        <Text style={{color: "white"}}> {post.likes.toLocaleString('en')} </Text>
+const Likes = ({ post }) => (
+    <View style={{ flexDirection: "row", marginTop: 4 }}>
+        <Text style={{ color: "white" }}> {post.likes.toLocaleString('en')} likes </Text>
     </View>
+)
+const Caption = ({ post }) => (
+    <View style={{ marginTop: 5 }}>
+        <Text style={{ color: 'white' }}>
+            <Text style={{ fontWeight: "600" }}>{post.user}</Text>
+            <Text> {post.caption}</Text>
+        </Text>
+    </View>
+)
+
+const CommentsSection = ({ post }) => (
+    <View style={{ marginTop: 5 }}>
+        {!!post.comments.length && (
+            <Text style={{ color: 'gray' }}>
+                View{post.comments.length > 1 ? " all" : " "} {post.comments.length}{''}
+                {post.comments.length > 1 ? " comments" : " comment"}
+            </Text>
+        )}
+    </View>
+)
+
+const Comments = ({ post }) => (
+    <>
+    {post.comments.map((comment, index) => 
+    <View style={{flexDirection: "row", marginTop: 4}} key={index}>
+        <Text style={{color: "white"}}>
+            <Text style={{fontWeight: "600"}}>{comment.user}</Text>{" "}
+            {comment.comment}
+        </Text>
+    </View>
+    )}
+    </>
 )
 
 const Icon = ({ imgStyle, imgUrl }) => (
@@ -101,10 +136,10 @@ const styles = StyleSheet.create({
     footerIcon: {
         height: 33,
         width: 33,
-    }, 
+    },
     LeftFooterIconsContainer: {
-        flexDirection: 'row', 
-        width: '32%', 
+        flexDirection: 'row',
+        width: '32%',
         justifyContent: 'space-between',
     },
 })
