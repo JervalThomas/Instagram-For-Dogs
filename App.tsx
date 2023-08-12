@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { IdTokenResult, onAuthStateChanged, User } from 'firebase/auth';
 
 import { FIREBASE_AUTH } from './firebaseConfig';
-import LandingScreen from "./screens/landing";
 import RegisterScreen from "./screens/register";
 import LoginScreen from './screens/login';
 import HomeScreen from './screens/home';
@@ -25,7 +24,6 @@ function UserLayout() {
 function NoUserLayout() {
   return (
     <NoUserStack.Navigator>
-      {/* <NoUserStack.Screen name = "Landing" component = {LandingScreen} options = {{ headerShown: false }} /> */}
       <NoUserStack.Screen 
         name = "Login" 
         options = {{ headerShown: false }}
@@ -38,15 +36,61 @@ function NoUserLayout() {
   );
 }
 
-export default function App() {
-  const [user, setUser] = useState<User | null>(null);
+export default function App() 
+{
+  const [user, setUser] = useState < User | null > (null);
+  const bypassAuthentication = true;
 
   useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log('user', user);
-      setUser(user);
-    });
+    if (bypassAuthentication) {
+      const mockUser: User = {
+        uid: 'mockUserId',
+        displayName: 'Test User',
+        email: 'test@example.com',
+        emailVerified: false,
+        isAnonymous: false,
+        metadata: undefined,
+        providerData: [],
+        refreshToken: '',
+        tenantId: '',
+        delete: function (): Promise<void> {
+          throw new Error('Function not implemented.');
+        },
+        getIdToken: function (forceRefresh?: boolean): Promise<string> {
+          throw new Error('Function not implemented.');
+        },
+        getIdTokenResult: function (forceRefresh?: boolean): Promise<IdTokenResult> {
+          throw new Error('Function not implemented.');
+        },
+        reload: function (): Promise<void> {
+          throw new Error('Function not implemented.');
+        },
+        toJSON: function (): object {
+          throw new Error('Function not implemented.');
+        },
+        phoneNumber: '',
+        photoURL: '',
+        providerId: ''
+      };
+      setUser(mockUser);
+    } else {
+      onAuthStateChanged(FIREBASE_AUTH, (user) => {
+        console.log('user', user);
+        setUser(user);
+      });
+    }
   }, []);
+
+  // useEffect(() => 
+  // {
+  //   onAuthStateChanged
+  //   (FIREBASE_AUTH, (user) => 
+  //     {
+  //       console.log('user', user);
+  //       setUser(user);
+  //     }
+  //   );
+  // },[]);
 
   return (
     <GestureHandlerRootView style = {{ flex: 1 }}>
