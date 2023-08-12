@@ -1,12 +1,41 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Divider } from 'react-native-elements'
+
+
+const PostFooterIcons = [
+    {
+        name: "Like",
+        Image: require("../../assets/heart.png"),
+        likedImage: "",
+    },
+    {
+        name: "Comments",
+        Image: require("../../assets/message-circle.png"),
+        likeedImage: "",
+    },
+    {
+        name: "Share",
+        Image: require("../../assets/direct_message.png"),
+        likeedImage: "",
+    },
+    {
+        name: "Save",
+        Image: require("../../assets/bookmark.png"),
+        likeedImage: "",
+    },
+]
 
 const Post = ({ post }) => {
     return (
         <View style={{ marginBottom: 30 }}>
             <Divider width={1} orientation='vertical' />
             <PostHeader post={post} />
+            <PostImage post={post} />
+            <View style={{ marginTop: 10 }}>
+                <PostFooter />
+                <Likes post={post}/>
+            </View>
         </View>
     )
 }
@@ -17,13 +46,46 @@ const PostHeader = ({ post }) => (
         margin: 5,
         alignItems: 'center',
     }}>
-        <View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image source={post.profilePicture} style={styles.story} />
-            <Text></Text>
+            <Text style={{ color: "white", marginLeft: 5, fontWeight: "700" }}>{post.user}</Text>
         </View>
+        <Text style={{ color: "white", fontWeight: "900" }}>...</Text>
     </View>
 )
 
+const PostImage = ({ post }) => (
+    <View style={{ width: "100%", height: 450 }}>
+        <Image source={post.postImage} style={{ height: "100%", resizeMode: "cover" }} />
+    </View>
+
+)
+
+const PostFooter = () => (
+    <View style={{ flexDirection: "row" }}>
+        <View style={styles.LeftFooterIconsContainer}>
+            <Icon imgStyle={styles.footerIcon} imgUrl={PostFooterIcons[0].Image} />
+            <Icon imgStyle={styles.footerIcon} imgUrl={PostFooterIcons[1].Image} />
+            <Icon imgStyle={styles.footerIcon} imgUrl={PostFooterIcons[2].Image} />
+        </View>
+        <View style={{flex: 1, alignItems: "flex-end"}}>
+        <Icon imgStyle={styles.footerIcon} imgUrl={PostFooterIcons[3].Image} />
+        </View>
+    </View>
+
+)
+
+const Likes = ({post}) => (
+    <View> 
+        <Text style={{color: "white"}}> {post.likes.toLocaleString('en')} </Text>
+    </View>
+)
+
+const Icon = ({ imgStyle, imgUrl }) => (
+    <TouchableOpacity>
+        <Image source={imgUrl} style={imgStyle} />
+    </TouchableOpacity>
+)
 
 export default Post
 
@@ -35,5 +97,14 @@ const styles = StyleSheet.create({
         borderColor: '#ff6501',
         marginLeft: 6,
         borderWidth: 1.6,
-    }
+    },
+    footerIcon: {
+        height: 33,
+        width: 33,
+    }, 
+    LeftFooterIconsContainer: {
+        flexDirection: 'row', 
+        width: '32%', 
+        justifyContent: 'space-between',
+    },
 })
