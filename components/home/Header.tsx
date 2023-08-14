@@ -26,11 +26,6 @@ const Header = ({ navigation } : any) => {
                         style={styles.icon} />
                 </TouchableOpacity>
             </View>
-
-            <Button 
-                title = "Sign out" 
-                onPress = {() => FIREBASE_AUTH.signOut()}
-            />
         </View>
     )
 }
