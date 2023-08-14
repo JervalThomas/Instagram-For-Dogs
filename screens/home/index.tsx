@@ -6,11 +6,11 @@ import Stories from '../../components/home/Stories'
 import Post from '../../components/home/Post'
 import { ScrollView } from 'react-native-gesture-handler'
 import { POSTS } from '../../data/posts'
+import BottomTabs, { bottomTabIcons} from '../../components/home/BottomTabs'
 
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View>
         <Header />
         <Stories />
         <ScrollView>
@@ -18,7 +18,7 @@ const HomeScreen = () => {
             <Post post={post} key={index}/>
           ))}
         </ScrollView>
-      </View>
+      <BottomTabs icons={bottomTabIcons}/>
     </SafeAreaView>
   )
 }
