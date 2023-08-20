@@ -12,12 +12,12 @@ const LoginForm = ({navigation}) =>
     const onSignIn = async () => {
         try {
         const response = await signInWithEmailAndPassword(auth, email, password);
-        console.log(response);
+        console.log('User successfully Signed In, Username: ', response.user.email );
 
         }
         catch (error: any) {
         console.log(error);
-        alert('Login failed: ' + error.message);
+        alert('Login failed: \n User not identified or invalid password');
         }
     }
 

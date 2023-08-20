@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../../components/home/Header'
@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { POSTS } from '../../data/posts'
 import BottomTabs, { bottomTabIcons} from '../../components/home/BottomTabs'
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
         <Header />
@@ -18,7 +18,7 @@ const HomeScreen = () => {
             <Post post={post} key={index}/>
           ))}
         </ScrollView>
-      <BottomTabs icons={bottomTabIcons}/>
+      <BottomTabs navigation = {navigation} icons={bottomTabIcons}/>
     </SafeAreaView>
   )
 }

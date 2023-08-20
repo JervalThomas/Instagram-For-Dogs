@@ -20,12 +20,7 @@ const signIn = ({navigation}) => {
         />
       </View>
 
-      <LoginForm  navigation = {navigation} />
-
-      <Button
-        title = "HomeScreen"
-        onPress={() => navigation.navigate("Home")} 
-      />
+      < LoginForm  navigation = {navigation} />
 
     </View>
   )

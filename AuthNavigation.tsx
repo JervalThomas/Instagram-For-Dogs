@@ -1,0 +1,59 @@
+import { View, Text } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { IdTokenResult, onAuthStateChanged, User } from 'firebase/auth';
+
+import { FIREBASE_AUTH } from './firebaseConfig';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SignedInStack, SignedOutStack } from './navigation';
+
+const AuthNavigation = () => 
+{
+    const [user, setUser] = useState < User | null > (null);
+    const bypassAuthentication = false;
+
+    useEffect(() => {
+        if (bypassAuthentication) {
+        const mockUser: User = {
+            uid: 'mockUserId',
+            displayName: 'Test User',
+            email: 'test@example.com',
+            emailVerified: false,
+            isAnonymous: false,
+            metadata: undefined,
+            providerData: [],
+            refreshToken: '',
+            tenantId: '',
+            delete: function (): Promise<void> {
+            throw new Error('Function not implemented.');
+            },
+            getIdToken: function (forceRefresh?: boolean): Promise<string> {
+            throw new Error('Function not implemented.');
+            },
+            getIdTokenResult: function (forceRefresh?: boolean): Promise<IdTokenResult> {
+            throw new Error('Function not implemented.');
+            },
+            reload: function (): Promise<void> {
+            throw new Error('Function not implemented.');
+            },
+            toJSON: function (): object {
+            throw new Error('Function not implemented.');
+            },
+            phoneNumber: '',
+            photoURL: '',
+            providerId: ''
+        };
+        setUser(mockUser);
+        } else {
+        onAuthStateChanged(FIREBASE_AUTH, (user) => {
+            console.log('user', user);
+            setUser(user);
+        });
+        }
+    }, []);
+
+    return(
+        user ? <SignedInStack/> : <SignedOutStack/>
+    )
+}
+
+export default AuthNavigation
