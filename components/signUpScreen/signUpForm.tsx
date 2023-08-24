@@ -1,19 +1,46 @@
 import { View, TextInput, StyleSheet, Pressable, Text } from 'react-native'
 import React, { useState } from 'react'
-import { FIREBASE_AUTH } from '../../firebaseConfig'
+import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from '../../firebaseConfig'
 import { createUserWithEmailAndPassword} from 'firebase/auth'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { collection, addDoc, setDoc, doc } from 'firebase/firestore'
 
-const SignUpForm = () => {
+
+
+const SignUpForm = ({navigation}) => 
+{
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const auth = FIREBASE_AUTH;
+  const db = FIREBASE_FIRESTORE;
+  //const collection = db.collection('users')
 
-  const onSignUp = async () => {
-    try {
-      const response = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(response);
+  const getRandomProfilePicture = async () => 
+  {
+    const response = await fetch('https://randomuser.me/api')
+    const data = await response.json()
+    return data.results[0].picture.large
+  }
 
+  const onSignUp = async () => 
+  {
+    try 
+    {
+      const authUser = await createUserWithEmailAndPassword(auth, email, password);
+      // console.log('User successfully created, \nemail: ', email, '\n password: ', password);
+
+      const docRef = await setDoc(
+        doc(collection(db, 'users'), authUser.user.email), 
+        {
+          owner_uid: authUser.user.uid,
+          username: name,
+          email: authUser.user.email,
+          profile_picture: await getRandomProfilePicture(),
+        }
+      );
+
+      
     }
     catch (error: any) {
       console.log(error);
@@ -23,28 +50,28 @@ const SignUpForm = () => {
 
   return (
     <View style = { styles.wrapper } >
-        <View style = { styles.inputField } >
-            <TextInput
-                placeholder = "Name"
-                placeholderTextColor = '#444'
-                autoCapitalize = "none"
-                onChangeText = {(name) => setName(name)}
-                autoFocus = {true}
-                autoCorrect = {true}
-                >
-            </TextInput>
-        </View>
+      <View style = { styles.inputField } >
+        <TextInput
+          placeholder = "Name"
+          placeholderTextColor = '#444'
+          autoCapitalize = "none"
+          onChangeText = {(name) => setName(name)}
+          autoFocus = {true}
+          autoCorrect = {true}
+        >
+        </TextInput>
+      </View>
       
 
       <View style = {styles.inputField}>
         <TextInput
-            placeholderTextColor = '#444'
-            placeholder = "Email"
-            autoCapitalize = "none"
-            onChangeText = {(email) => setEmail(email)}
-            keyboardType = 'email-address'
-            autoFocus = {true}
-            autoCorrect = {false}
+          placeholderTextColor = '#444'
+          placeholder = "Email"
+          autoCapitalize = "none"
+          onChangeText = {(email) => setEmail(email)}
+          keyboardType = 'email-address'
+          autoFocus = {true}
+          autoCorrect = {false}
         />
       </View>
 
@@ -61,11 +88,18 @@ const SignUpForm = () => {
         </View>
 
         <Pressable 
-            style = { styles.button } 
+          style = { styles.button } 
             onPress = {onSignUp}
         >
-            <Text style = {styles.buttonText}> Log In</Text> 
+            <Text style = {styles.buttonText}> Sign Up</Text> 
         </Pressable>
+
+        <View style = {styles.signupContainer}>
+          <Text> Already have an account? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")} >
+            <Text style = {{color: '#6BB0F5'}}> Log In</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   )
 }

@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Button } from 'react-native-elements'
 import { FIREBASE_AUTH } from '../../firebaseConfig'
 
-const Header = ({ navigation } : any) => {
+const Header = () => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress = {() => FIREBASE_AUTH.signOut()}>
                 <Image
                     source={require('../../assets/insta-written.png')}
                     style={styles.logo} />

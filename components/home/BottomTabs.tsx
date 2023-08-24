@@ -33,13 +33,37 @@ export const bottomTabIcons = [
     },
 ]
 
-const BottomTabs = ({ icons }) => {
+const BottomTabs = ({ icons, navigation }) => 
+{
     const [activeTab, setActiveTab] = useState('Home')
 
-    const Icon = ({ icon }) => (
-        <TouchableOpacity onPress={() => setActiveTab(icon.name)}>
-            <Image source={activeTab == icon.name ? icon.active : icon.inactive} 
-            style={[styles.icon, icon.name === "Profile" ? styles.profilePicture : null]} />
+    const Icon = ({ icon }) => 
+    (
+        <TouchableOpacity onPress={() => 
+        {
+            setActiveTab(icon.name);
+            if (icon.name === "Create")
+            {
+                navigation.push('NewPostScreen');
+            }
+            else if(icon.name === "Home")
+            {
+                navigation.push('HomeScreen');
+            }
+        }}
+        >
+            <Image 
+                source = 
+                {
+                    activeTab == icon.name ? icon.active : icon.inactive
+                } 
+                style = 
+                {
+                    [
+                        styles.icon, icon.name === "Profile" ? styles.profilePicture : null
+                    ]
+                } 
+            />
         </TouchableOpacity>
     )
 

@@ -13,7 +13,7 @@ const Stories = () => {
                     <TouchableOpacity style={{alignItems: 'center'}} key={index}>
                         <Image source={story.image} style={styles.story} />
                         <Text style={{ color: 'white' }}>
-                            {story.user.length > 11 ? story.user.slice(0,10).toLowerCase() + '...' : story.user.toLowerCase()}
+                            {story.user.length > 11 ? story.user.slice(0,6).toLowerCase() + '...' : story.user.toLowerCase()}
                         </Text>
                     </TouchableOpacity>
                 ))}
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         height: 70,
         borderRadius: 50,
         borderColor: '#ff6501',
-        marginLeft: 6,
+        marginLeft: 18,
         borderWidth: 3,
     }
 })
