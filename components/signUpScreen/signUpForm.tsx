@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from '../../firebaseConfig'
 import { createUserWithEmailAndPassword} from 'firebase/auth'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc, setDoc, doc } from 'firebase/firestore'
 
 
 
@@ -28,18 +28,17 @@ const SignUpForm = ({navigation}) =>
     try 
     {
       const authUser = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('User successfully created, \nemail: ', email, '\n password: ', password);
+      // console.log('User successfully created, \nemail: ', email, '\n password: ', password);
 
-      const docRef = await addDoc
-      (
-        collection(db, "users"),
+      const docRef = await setDoc(
+        doc(collection(db, 'users'), authUser.user.email), 
         {
           owner_uid: authUser.user.uid,
           username: name,
           email: authUser.user.email,
           profile_picture: await getRandomProfilePicture(),
         }
-      )
+      );
 
       
     }

@@ -27,6 +27,7 @@ const PostFooterIcons = [
 ]
 
 const Post = ({ post }) => {
+    
     return (
         <View style={{ marginBottom: 30 }}>
             <Divider width={1} orientation='vertical' />
@@ -40,7 +41,7 @@ const Post = ({ post }) => {
                 <Comments post={post}/>
             </View>
         </View>
-    )
+    );
 }
 const PostHeader = ({ post }) => (
     <View style={{
@@ -50,7 +51,7 @@ const PostHeader = ({ post }) => (
         alignItems: 'center',
     }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image source={post.profilePicture} style={styles.story} />
+            <Image source={{uri: post.profilePicture}} style={styles.story} />
             <Text style={{ color: "white", marginLeft: 5, fontWeight: "700" }}>{post.user}</Text>
         </View>
         <Text style={{ color: "white", fontWeight: "900" }}>...</Text>
@@ -59,7 +60,7 @@ const PostHeader = ({ post }) => (
 
 const PostImage = ({ post }) => (
     <View style={{ width: "100%", height: 450 }}>
-        <Image source={post.postImage} style={{ height: "100%", resizeMode: "cover" }} />
+        <Image source={{uri: post.imageUrl}} style={{ height: "100%", resizeMode: "cover" }} />
     </View>
 
 )

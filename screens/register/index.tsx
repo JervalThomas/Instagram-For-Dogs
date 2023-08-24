@@ -5,7 +5,7 @@ import SignUpForm from '../../components/signUpScreen/signUpForm';
 
 const INSTAGRAM_LOGO = 'https://img.freepik.com/premium-vector/instagram-social-media-icon-gradient-social-media-logo_197792-4682.jpg?w=2000'
 
-const signIn = ({navigation}) => {
+const SignUp = ({navigation}) => {
   return(
     <View style = {styles.container}>
       <View style = {styles.logoContainer}>
@@ -47,6 +47,6 @@ const styles = StyleSheet.create
   }
 )
 
-export default signIn
+export default SignUp
 
 
