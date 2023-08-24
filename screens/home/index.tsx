@@ -21,7 +21,7 @@ const HomeScreen = ({navigation}) =>
   {
     const unsubscribe = onSnapshot(collectionGroup(db, 'posts'), (snapshot) => 
     {
-      const fetchedPosts = snapshot.docs.map((doc) => doc.data());
+      const fetchedPosts = snapshot.docs.map(post => ({id: post.id, ...post.data()}));
       setPosts(fetchedPosts);
     });
   
